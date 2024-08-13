@@ -2,7 +2,6 @@
 #include <vector>
 #include <algorithm>
 using namespace std;
-
 int solution(vector<int> &A) {
     int n=A.size();
     if (n <= 1) return 0; 
