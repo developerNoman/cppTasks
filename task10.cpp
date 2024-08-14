@@ -36,7 +36,6 @@ int solution(vector<int>& A) {
     int n = A.size();
     int size = 0, candidate = -1;
 
-    // Step 1: Find the candidate for leader
     for (int num : A) {
         if (size == 0) {
             candidate = num;
@@ -49,8 +48,6 @@ int solution(vector<int>& A) {
             }
         }
     }
-
-    // Step 2: Verify if candidate is actually the leader
     int leader = -1, leaderCount = 0;
     for (int num : A) {
         if (num == candidate) {
@@ -61,10 +58,8 @@ int solution(vector<int>& A) {
     if (leaderCount > n / 2) {
         leader = candidate;
     } else {
-        return 0;  // No leader, so no equi leaders
+        return 0;  
     }
-
-    // Step 3: Count equi leaders
     int equiLeaders = 0, leftLeaderCount = 0;
     for (int i = 0; i < n; i++) {
         if (A[i] == leader) {
