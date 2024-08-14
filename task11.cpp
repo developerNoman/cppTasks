@@ -4,26 +4,45 @@
 #include <algorithm>
 using namespace std;
 
- int solution(vector<int> &A, int n){
-        int sum=0;
-        int count=0;
-        int maxSum=0;
-    for(int i=0;i<n;i++){
-     for(int j=i+1;j<=n;j++){
-    for(int k=i; k<=j; k++){
-        sum +=A[k];
-    }
-    maxSum=max(sum,maxSum);
-    sum=0;
-    }
-    }
-     return maxSum;
-}
 
+int solution(vector<int> &A) {
+    int n = A.size();
+    if (n == 2) {
+        return max(A[0],max(A[1], A[0]+A[1]));
+    }
+
+    int maxSum = A[0];//3
+    int currentSum = A[0];//3
+
+    for (int i = 1; i < n; i++) {
+        currentSum = max(A[i], currentSum + A[i]);//(2,5)->5,(-6,-1)->-1,(4,3)->4,(0,4)->4
+        maxSum = max(maxSum, currentSum);//(3,5)->5,(5,-1)->5,(5,4)->5,(5,4)------->5
+    }
+
+    return maxSum;
+}
 int main()
 {
     vector<int> A={3,2,-6,4,0};
-    int n = A.size();
-    cout << "The result is : " << solution(A, n) << endl;
+    cout << "The result is : " << solution(A) << endl;
     return 0;
 }
+
+
+// int solution(vector<int> &A) {
+//      int n=A.size(); 
+//     if (n == 2) {
+//         return A[0] + A[1];
+//     }
+
+//     int maxSum = INT_MIN;
+//     for (int i = 0; i < n; i++) {
+//         int sum = 0;
+//         for (int j = i; j < n; j++) {
+//             sum += A[j];
+//             maxSum = max(maxSum, sum);
+//         }
+//     }
+
+//     return maxSum;
+// }
