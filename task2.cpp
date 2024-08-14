@@ -13,18 +13,16 @@ vector<int> solution(vector<int> &A, int N) {
 
     for (int i = 0; i < n; i++) {
         if (A[i] <= N) {
-            int index = A[i] - 1;
-            counter[index] = max(counter[index], last_update);
-            counter[index]++;
-            maxi = max(maxi, counter[index]);
+            int index = A[i] - 1;//index 3->2  , index 4->3 , index 4->3 ,index 6->5 (now else),index 1->0
+            counter[index] = max(counter[index], last_update);//(0,0), (0,0), (1,0),(0,2),(2,2),(3,2)
+            counter[index]++;// (0, 0, 1, 0, 0), (0, 0, 1, 1, 0) ,(0, 0, 1, 2, 0),(3,0,1,2,0),(3,0,1,3,0)(3,0,1,4,0)
+            maxi = max(maxi, counter[index]);//maxi=1 , maxi=1  , maxi=2,maxi=2
         } else {
-            last_update = maxi;
+            last_update = maxi; //when index 6->5 => last_update=2
         }
     }
-
-    // Apply last_update to all elements
     for (int i = 0; i < N; i++) {
-        counter[i] = max(counter[i], last_update);
+        counter[i] = max(counter[i], last_update);//(3,0,1,4,0)
     }
 
     return counter;
@@ -42,13 +40,7 @@ int main()
     cout << "]" << endl;
     return 0;
 }
-//    (0, 0, 1, 0, 0)
-//     (0, 0, 1, 1, 0)
-//     (0, 0, 1, 2, 0)
-//     (2, 2, 2, 2, 2)
-//     (3, 2, 2, 2, 2)
-//     (3, 2, 2, 3, 2)
-//     (3, 2, 2, 4, 2)
+
 
 //  vector<int> solution(vector<int> &A,int N){
 //      int n = A.size();
