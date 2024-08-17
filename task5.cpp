@@ -6,12 +6,12 @@ using namespace std;
 
 //function to check a triangle can be built from a given set of edges.
 int solution(vector<int> &A) {
-    int n = A.size();
-    if (n < 3) return 0;
+    int length = A.size();
+    if (length < 3) return 0;
     sort(A.begin(), A.end());
 
-    for (int i = 0; i < n - 2; ++i) {
-        if (static_cast<long long>(A[i]) + A[i + 1] > A[i + 2]) {
+    for (int index = 0; index < length - 2; ++index) {
+        if (static_cast<long long>(A[index]) + A[index + 1] > A[index + 2]) {
             return 1;
         }
     }
