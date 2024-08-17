@@ -4,28 +4,29 @@
 #include <algorithm>
 using namespace std;
 
-
+//function which is used for parenthesis match ().
 int solution(string &S){
-    int n=S.size();
-     if(n==0){
+    int length=S.size();
+     if(length==0){
         return 1;
     }
-    if (n==1){
+    if (length==1){
         return 0;
     }
-    stack<char> s1;
-    for (int i=0;i<n;i++){
-        if(S[i]=='('){
-            s1.push(S[i]);//1(,2(,4(,5(,8(
+
+    stack<char> bracesStack;
+    for (int index=0;index<length;index++){
+        if(S[index]=='('){
+            bracesStack.push(S[index]);
         }
         else{
-            if(s1.empty() || s1.top()!= '('){//3),6),7),9),10)
+            if(bracesStack.empty() || bracesStack.top()!= '('){
                 return 0;
             }
-            s1.pop();
+            bracesStack.pop();
         }
     }
-    if(s1.empty()){
+    if(bracesStack.empty()){
         return 1;
     }
     return 0;
@@ -56,10 +57,10 @@ int main()
 //             }
 //     }
 
-//     // stack<char> s1;
+//     // stack<char> bracesStack;
 //     // for (int i=0; i<n; i++) 
 //     // {
-//     //     s1.push(S[i]);
+//     //     bracesStack.push(S[i]);
 //     // }
 //     if(leftBrace==rightBrace){
 //         return 1;
@@ -67,4 +68,32 @@ int main()
     
 //     return 0;
 
+// }
+
+
+
+// int solution(string &S){
+//     int n=S.size();
+//      if(n==0){
+//         return 1;
+//     }
+//     if (n==1){
+//         return 0;
+//     }
+//     stack<char> bracesStack;
+//     for (int i=0;i<n;i++){
+//         if(S[i]=='('){
+//             bracesStack.push(S[i]);//1(,2(,4(,5(,8(
+//         }
+//         else{
+//             if(bracesStack.empty() || bracesStack.top()!= '('){//3),6),7),9),10)
+//                 return 0;
+//             }
+//             bracesStack.pop();
+//         }
+//     }
+//     if(bracesStack.empty()){
+//         return 1;
+//     }
+//     return 0;
 // }
