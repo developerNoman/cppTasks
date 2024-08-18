@@ -4,34 +4,63 @@
 #include <algorithm>
 using namespace std;
 
-
-int solution(vector<int> &A, int n){
-    unordered_map<int, int> map; 
-    int num;
+//function use to find dominator(most occuring number)
+int solution(vector<int> &A) {
+    int length = A.size();
+    unordered_map<int, int> inputMap; 
+    int dominator = -1;
     int maxFreq = 0;
-    for(int i = 0; i < n; i++){
-        if(map.count(A[i]) > 0){
-            map[A[i]]++;
-        } else {
-            map[A[i]] = 1;
-        }
-        if(map[A[i]] > maxFreq){
-            maxFreq = map[A[i]];
-            num = A[i];
+    
+    for (int i = 0; i < length; i++) {
+        inputMap[A[i]]++;
+        if (inputMap[A[i]] > maxFreq) {
+            maxFreq = inputMap[A[i]];
+            dominator = A[i];
         }
     }
-    return num;
+
+    if (maxFreq > length / 2) {
+        for (int i = 0; i < length; i++) {
+            if (A[i] == dominator) {
+                // return i;
+                   return dominator;
+            }
+        }
+    }
+    
+    return -1;
 }
-int main()
-{
-    vector<int> A={3,4,3,2,3,-1,3,3};
-    int n = A.size();
-    int num=solution(A, n);
-    cout << "The result is : " << endl;
-    for(int i = 0; i < n; i++){
-        if(A[i]==num){
-            cout<< i <<" ";
+int main() {
+    vector<int> A = {3, 4, 3, 2, 3, -1, 3, 3};
+    int result = solution(A);
+    cout << "The result is: " ;
+    for(int i=0;i<A.size();i++){
+        if(A[i]==result){
+            cout<<i<<" ";
         }
     }
     return 0;
 }
+
+
+
+
+
+// int solution(vector<int> &A, int n){
+//       unordered_inputMap<int, int> inputMap; 
+//     int num;
+//     int maxFreq = 0;
+//     for(int i = 0; i < n; i++){
+//         if(inputMap.count(A[i]) > 0){
+//             inputMap[A[i]]++;
+//         } else {
+//             inputMap[A[i]] = 1;
+//         }
+//         if(inputMap[A[i]] > maxFreq){
+//             maxFreq = inputMap[A[i]];
+//             num = A[i];
+//             return
+//         }
+//     }
+//     return num;
+// }
