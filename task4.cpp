@@ -1,62 +1,37 @@
-
-
 #include <iostream>
 #include <vector>
 #include <cfloat>
 #include <algorithm>
 using namespace std;
 
-// int solution(vector<int> &A) {
-//     int n = A.size();
-//     if (n < 2) return -1; 
-
-//     double min_avg = DBL_MAX;
-//     int min_pos = 0;
-
-
-//     for (int i = 0; i < n - 1; ++i) {
-//         double avg = (A[i] + A[i + 1]) / 2.0;
-//         if (avg < min_avg) {
-//             min_avg = avg;
-//             min_pos = i;
-//         }
-//     }
-
-//     for (int i = 0; i < n - 2; ++i) {
-//         double avg = (A[i] + A[i + 1] + A[i + 2]) / 3.0;
-//         if (avg < min_avg) {
-//             min_avg = avg;
-//             min_pos = i;
-//         }
-//     }
-
-//     return min_pos;
-// }
+// function to find the minimal average of any slice containing at least two elements.
 int solution(vector<int> &A) {
-    int n = A.size();
-    if (n < 2) return -1; 
+    int length = A.size();
+    if (length < 2) return -1; 
+
+    double minAvg = DBL_MAX;
+    int minPos = 0;
 
 
-    double min_avg = DBL_MAX;
-    int min_pos = 0;
-
-    for (int length = 2; length <= n; length++) {
-        for (int i = 0; i <= n - length; i++) {
-
-            double sum = 0;
-            for (int j = 0; j < length; j++) {
-                sum += A[i + j];
-            }
-            double avg = sum / length;
-            if (avg < min_avg) {
-                min_avg = avg;
-                min_pos = i;
-            }
+    for (int index = 0; index < length - 1; ++index) {
+        double avg = (A[index] + A[index + 1]) / 2.0;
+        if (avg < minAvg) {
+            minAvg = avg;
+            minPos = index;
         }
     }
 
-    return min_pos;
+    for (int index= 0; index < length - 2; ++index) {
+        double avg = (A[index] + A[index + 1] + A[index + 2]) / 3.0;
+        if (avg < minAvg) {
+            minAvg = avg;
+            minPos = index;
+        }
+    }
+
+    return minPos;
 }
+
 int main() {
     vector<int> A = {4, 2, 2, 5, 1, 5, 8};
     cout << "The result is: " << solution(A) << endl;
@@ -85,3 +60,27 @@ int main() {
 //      return minavg;
 // }
 
+// int solution(vector<int> &A) {
+//     int size = A.size();
+//     if (size < 2) return -1; 
+
+
+//     double minAvg = DBL_MAX;
+//     int minPos = 0;
+
+//     for (int length = 2; length <= size; length++) {
+//         for (int i = 0; i <= size - length; i++) {
+
+//             double sum = 0;
+//             for (int j = 0; j < length; j++) {
+//                 sum += A[i + j];
+//             }
+//             double avg = sum / length;
+//             if (avg < minAvg) {
+//                 minAvg = avg;
+//                 minPos = i;
+//             }
+//         }
+//     }
+//     return minPos;
+// }
