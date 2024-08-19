@@ -23,12 +23,13 @@ int solution(vector<int> &A) {
     int leftSide = 1;
     int rightSide = peaks.size();
     
+    
     while (leftSide <= rightSide) {
         int currentFlags = (leftSide + rightSide) / 2;
         int flags = 1;
         int lastFlag = peaks[0];
 
-        for (int i = 1; i < peaks.size(); i++) {
+        for (int i = 1; i < rightSide; i++) {
             if (peaks[i] - lastFlag >= currentFlags) {
                 flags++;
                 lastFlag = peaks[i];
