@@ -51,7 +51,7 @@ int main()
 //     if (n == 2) {
 //         return max(A[0],max(A[1], A[0]+A[1]));
 //     }
-
+//  vector<int> A={3,2,-6,4,0};
 //     int maxSum = A[0];//3
 //     int currentSum = A[0];//3
 
