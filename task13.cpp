@@ -13,7 +13,7 @@ int solution(vector<int> &A) {
         if (A[index] > A[index - 1] && A[index] > A[index + 1]) {
             peaks.push_back(index);
         }
-    }
+    }//peaks = {1, 3, 5, 10}
 
     if (peaks.size() == 0) {
         return 0;
@@ -25,7 +25,7 @@ int solution(vector<int> &A) {
     
     
     while (leftSide <= rightSide) {
-        int currentFlags = (leftSide + rightSide) / 2;
+        int currentFlags = (leftSide + rightSide) / 2; //currentFlags = (1 + 4) / 2 = 2, currentFlags = (3 + 4) / 2 = 3, currentFlags = (4 + 4) / 2 = 4
         int flags = 1;
         int lastFlag = peaks[0];
 
