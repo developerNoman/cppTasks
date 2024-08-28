@@ -33,8 +33,8 @@ int solution(string &S){
 }
 int main()
 {
-    string s="(()(())())";
-    cout << "The result is : " << solution(s)<< endl;
+    string str="(()(())())";
+    cout << "The result is : " << solution(str)<< endl;
     return 0;
 }
 
