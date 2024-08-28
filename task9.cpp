@@ -1,44 +1,45 @@
 #include <iostream>
 #include <vector>
 #include <unordered_map>
-#include <algorithm>
 using namespace std;
 
-//function use to find dominator(most occuring number)
+// Function to find the most frequent element
 int solution(vector<int> &A) {
-    int length = A.size();
-    unordered_map<int, int> inputMap; 
+    unordered_map<int, int> freqMap; 
     int dominator = -1;
-    int maxFreq = 0;
+    int maxFrequency = 0;
     
-    for (int i = 0; i < length; i++) {
-        inputMap[A[i]]++;
-        if (inputMap[A[i]] > maxFreq) {
-            maxFreq = inputMap[A[i]];
-            dominator = A[i];
+    // for (int num : A) {
+    //     freqMap[num]++;
+    //     if (freqMap[num] > maxFrequency) {
+    //         maxFrequency = freqMap[num];
+    //         dominator = num;
+    //     }
+    // }
+    int length=A.size();
+    for (int index=0; index<length;index++) {
+        int num = A[index];
+        freqMap[num]++;
+        if (freqMap[num] > maxFrequency) {
+            maxFrequency = freqMap[num];
+            dominator = num;
         }
     }
+    
 
-    if (maxFreq > length / 2) {
-        for (int i = 0; i < length; i++) {
-            if (A[i] == dominator) {
-                // return i;
-                   return dominator;
-            }
-        }
-    }
-    
-    return -1;
+    return dominator;
 }
+
 int main() {
     vector<int> A = {3, 4, 3, 2, 3, -1, 3, 3};
-    int result = solution(A);
-    cout << "The result is: " ;
-    for(int i=0;i<A.size();i++){
-        if(A[i]==result){
-            cout<<i<<" ";
+    int dominator = solution(A);
+    cout << "The dominator are at: ";
+        for (int i = 0; i < A.size(); i++) {
+        if (A[i] == dominator) {
+            cout << i << " ";
         }
     }
+    
     return 0;
 }
 
@@ -63,4 +64,47 @@ int main() {
 //         }
 //     }
 //     return num;
+// }
+
+// #include <iostream>
+// #include <vector>
+// #include <unordered_map>
+// #include <algorithm>
+// using namespace std;
+
+// //function use to find dominator(most occuring number)
+// int solution(vector<int> &A) {
+//     int length = A.size();
+//     unordered_map<int, int> inputMap; 
+//     int dominator = -1;
+//     int maxFreq = 0;
+    
+//     for (int i = 0; i < length; i++) {
+//         inputMap[A[i]]++;   //3-->1,
+//         if (inputMap[A[i]] > maxFreq) {
+//             maxFreq = inputMap[A[i]];
+//             dominator = A[i];
+//         }
+//     }
+
+//     if (maxFreq > length / 2) {
+//         for (int i = 0; i < length; i++) {
+//             if (A[i] == dominator) {
+//                    return dominator;
+//             }
+//         }
+//     }
+    
+//     return -1;
+// }
+// int main() {
+//     vector<int> A = {3, 4, 3, 2, 3, -1, 3, 3};
+//     int result = solution(A);
+//     cout << "The result is: " ;
+//     for(int i=0;i<A.size();i++){
+//         if(A[i]==result){
+//             cout<<i<<" ";
+//         }
+//     }
+//     return 0;
 // }
