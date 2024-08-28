@@ -9,13 +9,6 @@ int solution(vector<int> &A) {
     int dominator = -1;
     int maxFrequency = 0;
     
-    // for (int num : A) {
-    //     freqMap[num]++;
-    //     if (freqMap[num] > maxFrequency) {
-    //         maxFrequency = freqMap[num];
-    //         dominator = num;
-    //     }
-    // }
     int length=A.size();
     for (int index=0; index<length;index++) {
         int num = A[index];
