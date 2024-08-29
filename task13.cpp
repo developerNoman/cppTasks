@@ -39,10 +39,11 @@ int solution(vector<int> &A) {
             }
         }
 
-        if (flags >= currentFlags) {
+        if (flags >= currentFlags) {//3<4
             maxFlags = currentFlags;
             leftSide = currentFlags + 1;
-        } else {
+        } 
+        else {
             rightSide = currentFlags - 1;
         }
     }

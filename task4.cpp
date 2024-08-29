@@ -9,8 +9,13 @@ int solution(vector<int> &A) {
     int length = A.size();
     if (length < 2) return -1; 
 
+    for(int i=0;i<length;i++){
+ double minAvg = DBL_MAX;
+ cout<<minAvg<<endl;
+    }
     double minAvg = DBL_MAX;
     int minPos = 0;
+
 
 
     for (int index = 0; index < length - 1; ++index) {

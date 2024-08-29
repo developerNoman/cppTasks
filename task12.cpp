@@ -5,29 +5,61 @@
 using namespace std;
 
 //function to return maximum double slice sum
-int solution(const vector<int> &A) {
-    int length = A.size();
-    if (length < 4) return 0; 
+// int solution(const vector<int> &A) {
+//     int length = A.size();
+//     if (length < 4) return 0; 
 
-    vector<int> endPosition(length, 0);
-    vector<int> startPosition(length, 0);
+//     vector<int> endPosition(length, 0);
+//     vector<int> startPosition(length, 0);
 
  
-    for (int index = 1; index < length - 1; ++index) {
-        endPosition[index] = max(0, endPosition[index - 1] + A[index]);
-    }
+//     for (int index = 1; index < length - 1; ++index) {
+//         endPosition[index] = max(0, endPosition[index - 1] + A[index]);
+//     }
 
-    for (int index = length- 2; index> 0; --index) {
-        startPosition[index] = max(0, startPosition[index + 1] + A[index]);
-    }
+//     for (int index = length- 2; index> 0; --index) {
+//         startPosition[index] = max(0, startPosition[index + 1] + A[index]);
+//     }
 
-    int maxSum= 0;
-    for (int index = 1; index < length - 1; ++index) {
-        maxSum = max(maxSum, endPosition[index - 1] + startPosition[index + 1]);
+//     int maxSum= 0;
+//     for (int index = 1; index < length - 1; ++index) {
+//         maxSum = max(maxSum, endPosition[index - 1] + startPosition[index + 1]);
+//     }
+
+//     return maxSum;
+// }
+int solution(vector<int> &A)
+{
+    int length = A.size();
+    int maxSum = 0;
+
+    for (int i = 0; i < length - 2; i++)
+    {
+        for (int j = i + 1; j < length - 1; j++)
+        {
+            for (int k = j + 1; k < length; k++)
+            {
+    
+                int currentSum = 0;
+
+                for (int l = i + 1; l < j; l++)
+                {
+                    currentSum += A[l];
+                }
+                for (int m = j + 1; m < k; m++)
+                {
+                    currentSum += A[m];
+                }
+
+                maxSum = max(maxSum, currentSum);
+            }
+        }
     }
 
     return maxSum;
 }
+
+
 int main()
 {
     vector<int> A = {3, 2, 6, -1, 4, 5, -1, 2};

@@ -3,14 +3,12 @@
 #include <unordered_map>
 using namespace std;
 
-// Function to find the most frequent element
 int solution(vector<int> &A) {
     unordered_map<int, int> freqMap; 
     int dominator = -1;
     int maxFrequency = 0;
-    
-    int length=A.size();
-    for (int index=0; index<length;index++) {
+    int length = A.size();
+    for (int index = 0; index < length; index++) {
         int num = A[index];
         freqMap[num]++;
         if (freqMap[num] > maxFrequency) {
@@ -18,20 +16,22 @@ int solution(vector<int> &A) {
             dominator = num;
         }
     }
+    if (maxFrequency > length / 2) {
+        for (int index = 0; index < length; index++) {
+            if (A[index] == dominator) {
+                return index;
+            }
+        }
+    }
     
-
-    return dominator;
+    return -1;
 }
+
 
 int main() {
     vector<int> A = {3, 4, 3, 2, 3, -1, 3, 3};
-    int dominator = solution(A);
-    cout << "The dominator are at: ";
-        for (int i = 0; i < A.size(); i++) {
-        if (A[i] == dominator) {
-            cout << i << " ";
-        }
-    }
+    // int dominator = solution(A);
+    cout << "The dominator are at: "<<solution(A);
     
     return 0;
 }
@@ -100,4 +100,31 @@ int main() {
 //         }
 //     }
 //     return 0;
+// }
+
+
+// int solution( vector<int> &A) {
+//     unordered_map<int, int> freqMap;
+//     int dominator = A[0];
+//     int maxFrequency = 0;
+    
+//     int length = A.size();
+//     if (length == 0) return -1;
+    
+//     for (int index = 0; index < length; ++index) {
+//         int num = A[index];
+//         freqMap[num]++;
+//         if (freqMap[num] > maxFrequency) {
+//             maxFrequency = freqMap[num];
+//             dominator = num;
+//         }
+//     }
+
+//     for (int i = 0; i < length; ++i) {
+//         if (A[i] == dominator) {
+//             return i;
+//         }
+//     }
+    
+//     return -1;
 // }
