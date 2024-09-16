@@ -9,29 +9,29 @@ using namespace std;
 
 vector<int> solution(string &s, vector<int> &P, vector<int> &Q)
 {
-    int n1 = P.size();
+    int length = P.size();
     vector<int> result;
-    result.reserve(n1);
+    result.reserve(length);
 
     unordered_map<char, int> items = {{'A', 1}, {'C', 2}, {'G', 3}, {'T', 4}};
-
-    int n = s.size();
-
-    for (int i = 0; i < n1; ++i)
+    int start;
+    int end;
+    char minCharacter;
+    for (int queryIndex = 0; queryIndex < length; ++queryIndex)
     {
-        int start = P[i];
-        int end = Q[i];
+        start = P[queryIndex];
+        end = Q[queryIndex];
 
-        char min_char = s[start];
-        if (min_char != 'A')
+        minCharacter = s[start];
+        if (minCharacter != 'A')
         {
-            for (int j = start; j <= end; ++j)
+            for (int index = start; index <= end; ++index)
             {
-                if (s[j] < min_char)
+                if (s[index] < minCharacter)
                 {
-                    min_char = s[j];
+                    minCharacter = s[index];
 
-                    if (min_char == 'A')
+                    if (minCharacter == 'A')
                     {
                         break;
                     }
@@ -39,7 +39,7 @@ vector<int> solution(string &s, vector<int> &P, vector<int> &Q)
             }
         }
 
-        result.push_back(items[min_char]);
+        result.emplace_back(items[minCharacter]);
     }
 
     return result;
@@ -60,112 +60,10 @@ int main()
     return 0;
 }
 
-// vector<int> solution(string &s, vector<int> &P, vector<int> &Q)
-// {
-//     int n1 = P.size();
-//     vector<int> result;
-//     result.reserve(n1);
-//     unordered_map<char, int> items = {{'A', 1}, {'C', 2}, {'G', 3}, {'T', 4}};
-//     string temp = "";
-//     for (int i = 0; i < n1; i++)
-//     {
-//         temp = s.substr(P[i], Q[i] - P[i] + 1);
-//         sort(temp.begin(), temp.end());
-//         result.emplace_back(items[temp[0]]);
-//     }
-//     return result;
-// }
-
-// vector<int> solution(string &s, vector<int> &P, vector<int> &Q)
-// {
-//     int n1 = P.size();
-//     vector<int> result;
-//     result.reserve(n1);
-
-//     unordered_map<char, int> items = {{'A', 1}, {'C', 2}, {'G', 3}, {'T', 4}};
-
-//     char min_char = 'T';
-//     int i, j;
-
-//     for (i = 0; i < n1; i++)
-//     {
-//         min_char = 'T';
-//         int pquery = P[i];
-//         int qQuery = Q[i];
-//         for (j = pquery; j <= qQuery; j++)
-//         {
-//             if (s[j] < min_char)
-//             {
-//                 min_char = s[j];
-//             }
-//             if (min_char == 'A')
-//                 break;
-//         }
-//         result.push_back(items[min_char]);
-//     }
-
-//     return result;
-// }
-
-// vector<int> solution(string &s, vector<int> &P, vector<int> &Q)
-// {
-//     int n1 = P.size();
-//     vector<int> result;
-//     result.reserve(n1);
-
-//     unordered_map<char, int> items = {{'A', 1}, {'C', 2}, {'G', 3}, {'T', 4}};
-//     vector<int> impact(s.size());
-
-//     for (int i = 0; i < s.size(); ++i)
-//     {
-//         impact[i] = items[s[i]];
-//     } // 2,1,3,2,2,4,1
-
-//     for (int i = 0; i < n1; ++i)
-//     {
-//         int start = P[i];
-//         int end = Q[i];
-
-//         auto minIt = min_element(impact.begin() + P[i], impact.begin() + Q[i] + 1);
-//         result.emplace_back(*minIt);
-//     }
-
-//     return result;
-// }
-
-// vector<int> solution(string &s, vector<int> &P, vector<int> &Q)
-// {
-//     int n1 = P.size();
-//     vector<int> result;
-//     result.reserve(n1);
-
-//     unordered_map<char, int> items = {{'A', 1}, {'C', 2}, {'G', 3}, {'T', 4}};
-
-//     int n = s.size();
-//     vector<vector<int>> minChar(n, vector<int>(n, INT_MAX));
-
-//     for (int i = 0; i < n; ++i) {
-//         char min_char = s[i];
-//         for (int j = i; j < n; ++j) {
-//             if (s[j] < min_char) {
-//                 min_char = s[j];
-//             }
-//             minChar[i][j] = items[min_char];
-//         }
-//     }
-
-//     for (int i = 0; i < n1; ++i)
-//     {
-//         result.push_back(minChar[P[i]][Q[i]]);
-//     }
-
-//     return result;
-// }
-
 // vector<int> solution(string &s, vector<int> &P, vector<int> &Q) {
-//     int n1 = P.size();
+//     int length = P.size();
 //     vector<int> result;
-//     result.reserve(n1);
+//     result.reserve(length);
 
 //     unordered_map<char, int> items = {{'A', 1}, {'C', 2}, {'G', 3}, {'T', 4}};
 
@@ -173,19 +71,19 @@ int main()
 
 //     vector<vector<int>> minChar(n, vector<int>(n, -1));
 
-//     for (int i = 0; i < n1; ++i) {
+//     for (int i = 0; i < length; ++i) {
 //         int start = P[i];
 //         int end = Q[i];
 
 //         if (minChar[start][end] == -1) {
-//             char min_char = s[start];
+//             char minCharacter = s[start];
 
-//             for (int j = start; j <= end; ++j) {
-//                 if (s[j] < min_char) {
-//                     min_char = s[j];
+//             for (int index = start; index <= end; ++index) {
+//                 if (s[index] < minCharacter) {
+//                     minCharacter = s[index];
 //                 }
 //             }
-//             minChar[start][end] = items[min_char];
+//             minChar[start][end] = items[minCharacter];
 //         }
 
 //         result.push_back(minChar[start][end]);

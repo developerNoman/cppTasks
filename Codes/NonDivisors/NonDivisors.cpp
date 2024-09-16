@@ -1,137 +1,79 @@
 #include <iostream>
 #include <vector>
-#include <algorithm>
 #include <unordered_map>
+#include <algorithm>
 #include <cmath>
 
 using namespace std;
 
-// Function to find the non-divisors of every number in an array
+// Function to find the non-divisors of every number in an array. Used the count map to store the occurance of every element in a map. sort the array and divide its elements with the divisors from 1 to square root of the processing elements. The corner case here is a pair check which is also fulfilled.
 vector<int> solution(vector<int> &A)
 {
     int length = A.size();
+
     unordered_map<int, int> result;
+    unordered_map<int, int> countMap;
+
+    for (int index = 0; index < length; ++index)
+    {
+        countMap[A[index]]++;
+    }
 
     vector<int> sortedA = A;
-    sort(sortedA.begin(), sortedA.end(), greater<int>());
-    int count = 0;
-    int current = 0;
-    int i, j;
+    sort(sortedA.begin(), sortedA.end());
 
-    for (i = 0; i < length; ++i)
+    int prevNum = -1;
+    int nonDivisors = 0;
+
+    for (int arrayIndex = 0; arrayIndex < length; ++arrayIndex)
     {
-        current = sortedA[i];
-        if (result.find(current) == result.end())
+        int num = sortedA[arrayIndex];
+        if (num == prevNum)
         {
-            count = i;
+            result[num] = nonDivisors;
+        }
+        else
+        {
+            int countDivisor = 0;
 
-            for (j = i + 1; j < length; ++j)
+            for (int index = 1; index <= sqrt(num); ++index)
             {
-
-                if (current % sortedA[j] != 0)
+                if (num % index == 0)
                 {
-                    ++count;
+
+                    countDivisor += countMap[index];
+
+                    if (index != num / index)
+                    {
+                        countDivisor += countMap[num / index];
+                    }
                 }
             }
 
-            result[current] = count;
+            nonDivisors = length - countDivisor;
+            result[num] = nonDivisors;
+
+            prevNum = num;
         }
     }
 
-    for (i = 0; i < length; i++)
+    for (int index = 0; index < length; index++)
     {
-        A[i] = result[A[i]];
+        A[index] = result[A[index]];
     }
 
     return A;
 }
+
 int main()
 {
     vector<int> A = {3, 1, 2, 3, 6}; // 1,2,3,3,6
     vector<int> result = solution(A);
 
-    for (int r : result)
+    for (int index = 0; index < result.size(); index++)
     {
-        cout << r << " ";
+        cout << result[index] << " ";
     }
 
     return 0;
 }
-
-// vector<int> solution(vector<int> &A)
-// {
-//     int length = A.size();
-
-//     vector<int> sortedA = A;
-//     sort(sortedA.begin(), sortedA.end(), greater<int>());
-
-//     vector<int> result(length, 0);
-
-//     int count = 0;
-//     for (int i = 0; i < length; ++i)
-//     {
-//         int current = sortedA[i];
-
-//         if (i > 0 && current == sortedA[i - 1])
-//         {
-//             continue;
-//         }
-
-//         count = i;
-//         for (int j = i + 1; j < length; ++j)
-//         {
-//             if (current % sortedA[j] != 0)
-//             {
-//                 ++count;
-//             }
-//         }
-//         for (int k = 0; k < length; ++k)
-//         {
-//             if (A[k] == current)
-//             {
-//                 result[k] = count;
-//             }
-//         }
-//     }
-
-//     return result;
-// }
-
-// vector<int> solution(vector<int> &A)
-// {
-//     int length = A.size();
-//     unordered_map<int, int> result;
-
-//     vector<int> sortedA = A;
-//     sort(sortedA.begin(), sortedA.end(), greater<int>());
-//     int count = 0;
-//     int current = 0;
-//     int i, j;
-
-//     for (i = 0; i < length; ++i)
-//     {
-//         current = sortedA[i];
-//         if (result.find(current) == result.end())
-//         {
-//             count = i;
-
-//             for (j = i + 1; j < length; ++j)
-//             {
-
-//                 if (current % sortedA[j] != 0)
-//                 {
-//                     ++count;
-//                 }
-//             }
-
-//             result[current] = count;
-//         }
-//     }
-
-//     for (i = 0; i < length; i++)
-//     {
-//         A[i] = result[A[i]];
-//     }
-
-//     return A;
-// }
