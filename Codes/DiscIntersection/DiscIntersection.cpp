@@ -8,13 +8,14 @@ int solution(vector<int> &A)
     size_t length = A.size();
     size_t intersections = 0;
 
-    for (size_t i = 0; i < length; ++i)
+    for (size_t index = 0; index < length; ++index)
     {
-        for (size_t j = i + 1; j < length; ++j)
+        for (size_t nextIndex = index + 1; nextIndex < length; ++nextIndex)
         {
-            if (A[i] + A[j] >= j - i)
+            if (A[index] + A[nextIndex] >= nextIndex - index)
             {
                 ++intersections;
+
                 if (intersections > 10000000)
                 {
                     return -1;
