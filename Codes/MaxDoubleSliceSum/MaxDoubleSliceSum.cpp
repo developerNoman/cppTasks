@@ -3,9 +3,9 @@
 using namespace std;
 
 // function to return maximum double slice sum. My approach is to find the sum from left side and right side separately and store in separate vector. Then at the end, simply ignore the index i because its not included in left side and right side. So we simply add most left side index value (index-1) and most right side index value (index+1)
-int solution(vector<int> &A)
+int solution(vector<int> &array)
 {
-    int length = A.size();
+    int length = array.size();
 
     if (length <= 3)
     {
@@ -20,7 +20,7 @@ int solution(vector<int> &A)
 
     for (int index = 1; index < length - 1; ++index)
     {
-        tempMax = leftSideSum[index - 1] + A[index];
+        tempMax = leftSideSum[index - 1] + array[index];
         if (tempMax > 0)
         {
             leftSideSum[index] = tempMax;
@@ -29,7 +29,7 @@ int solution(vector<int> &A)
 
     for (int index = length - 2; index > 0; --index)
     {
-        tempMax = rightSideSum[index + 1] + A[index];
+        tempMax = rightSideSum[index + 1] + array[index];
         if (tempMax > 0)
         {
             rightSideSum[index] = tempMax;

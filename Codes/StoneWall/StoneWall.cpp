@@ -3,22 +3,22 @@
 using namespace std;
 
 // function to find the minimum number of blocks for making the stone wall.
-int solution(const vector<int> &A)
+int solution(vector<int> &array)
 {
-    int length = A.size();
+    int length = array.size();
     vector<int> blocks;
     int totalBlocks = 0;
 
     for (int height = 0; height < length; height++)
     {
-        while (!blocks.empty() && blocks.back() > A[height])
+        while (!blocks.empty() && blocks.back() > array[height])
         {
             blocks.pop_back();
         }
 
-        if (blocks.empty() || blocks.back() < A[height])
+        if (blocks.empty() || blocks.back() < array[height])
         {
-            blocks.push_back(A[height]);
+            blocks.push_back(array[height]);
             totalBlocks++;
         }
     }

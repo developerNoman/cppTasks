@@ -1,72 +1,67 @@
 
-// #include <iostream>
-// #include <vector>
-// #include <climits>
-// #include <algorithm>
-// using namespace std;
-
-// int  solution(vector<int> &A, int n){
-//     vector<int>  result;
-//        for(int i=1;i<n-1;i++){
-//          if(A[i]>A[i-1]&& A[i]>A[i+1]){
-//             result.push_back(i);
-//          }
-//     }
-
-// }
-
-// int main()
-// {
-
-//     vector<int> A={1,2,3,4,3,4,1,2,3,4,6,2};
-//     int n = A.size();
-//     cout << "The result is : " << solution(A, n) << endl;
-//     return 0;
-// }
-
-
 #include <iostream>
 #include <vector>
-#include <cmath>
 
 using namespace std;
 
-int solution(vector<int> &A) {
-    int n = A.size();
+// function to find the number of peaks in each block where the blocks should be evenly divided
+int solution(vector<int> &array)
+{
+
+    int length = array.size();
+
     vector<int> peaks;
 
-    for (int i = 1; i < n - 1; ++i) {
-        if (A[i] > A[i - 1] && A[i] > A[i + 1]) {
-            peaks.push_back(i);
+    for (int index = 1; index < length - 1; ++index)
+    {
+        if (array[index] > array[index - 1] && array[index] > array[index + 1])
+        {
+            peaks.push_back(index);
         }
     }
 
-    if (peaks.empty()) return 0;
+    if (peaks.empty())
+    {
+        return 0;
+    }
 
+    int peakSize = peaks.size();
 
     int maxBlocks = 0;
-    for (int K = 1; K <= n; ++K) {
-        if (n % K == 0) { 
-            int blockSize = n / K;
-            int peakIndex = 0;
-            bool valid = true;
+    int peakIndex;
+    int blockSize;
+    bool valid;
+    bool blockHasPeak;
 
-            for (int i = 0; i < K; ++i) {
-                bool blockHasPeak = false;
-                while (peakIndex < peaks.size() && peaks[peakIndex] < (i + 1) * blockSize) {
-                    if (peaks[peakIndex] >= i * blockSize) {
+    for (int blocks = 1; blocks <= length; ++blocks)
+    {
+        if (length % blocks == 0)
+        {
+            blockSize = length / blocks;
+            peakIndex = 0;
+            valid = true;
+
+            for (int currentBlock = 0; currentBlock < blocks; ++currentBlock)
+            {
+                blockHasPeak = false;
+                while (peakIndex < peakSize && peaks[peakIndex] < (currentBlock + 1) * blockSize)
+                {
+                    if (peaks[peakIndex] >= currentBlock * blockSize)
+                    {
                         blockHasPeak = true;
                         break;
                     }
                     ++peakIndex;
                 }
-                if (!blockHasPeak) {
+                if (!blockHasPeak)
+                {
                     valid = false;
                     break;
                 }
             }
-            if (valid) {
-                maxBlocks = max(maxBlocks, K);
+            if (valid)
+            {
+                maxBlocks = max(maxBlocks, blocks);
             }
         }
     }
@@ -74,20 +69,9 @@ int solution(vector<int> &A) {
     return maxBlocks;
 }
 
-int main() {
+int main()
+{
     vector<int> A = {1, 2, 3, 4, 3, 4, 1, 2, 3, 4, 6, 2};
     cout << "The result is: " << solution(A) << endl;
     return 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
