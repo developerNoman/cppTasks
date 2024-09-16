@@ -1,21 +1,21 @@
-#include <vector>
 #include <iostream>
-#include <algorithm>
+#include <vector>
 using namespace std;
 
-int solution(vector<int> &A)
+// function to find the intersection of discs.
+int solution(vector<int> &array)
 {
-    size_t length = A.size();
+    size_t length = array.size();
     size_t intersections = 0;
 
+    // If the center+radius of first disc is greater than or equal to center-radius of second. There's an intersection.
     for (size_t index = 0; index < length; ++index)
     {
         for (size_t nextIndex = index + 1; nextIndex < length; ++nextIndex)
         {
-            if (A[index] + A[nextIndex] >= nextIndex - index)
+            if (array[index] + array[nextIndex] >= nextIndex - index)
             {
                 ++intersections;
-
                 if (intersections > 10000000)
                 {
                     return -1;

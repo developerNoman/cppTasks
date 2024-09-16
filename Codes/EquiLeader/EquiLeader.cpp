@@ -1,26 +1,29 @@
-#include <vector>
-#include <algorithm>
 #include <iostream>
+#include <vector>
 #include <unordered_map>
 using namespace std;
 
-int solution(vector<int> &A)
+// function to find the equileader in the vector. Leader is the number which occur more then half in the array. The equileaders are that leaders which occur more than half in subarrays.
+int solution(vector<int> &array)
 {
-    int n = A.size();
+
+    int length = array.size();
     unordered_map<int, int> frequency;
-    for (int num : A)
+
+    // find frequency of each element of array and store it in frequency map
+    for (int index = 0; index < length; ++index)
     {
-        frequency[num]++;
+        frequency[array[index]]++;
     }
 
     int leader = -1;
 
-    for (const auto &entry : frequency)
+    // logic to find the leader (the number that occur more than half in an array)
+    for (auto it = frequency.begin(); it != frequency.end(); ++it)
     {
-        int num = entry.first;
-        int count = entry.second;
-
-        if (count > n / 2)
+        int num = it->first;
+        int count = it->second;
+        if (count > length / 2)
         {
             leader = num;
             break;
@@ -36,15 +39,16 @@ int solution(vector<int> &A)
     int rightLeaderCount = frequency[leader];
     int equiLeaders = 0;
 
-    for (int i = 0; i < n - 1; i++)
+    // logic to find the equileader (the leader that occur more than half in subarrays)
+    for (int index = 0; index < length - 1; ++index)
     {
-        if (A[i] == leader)
+        if (array[index] == leader)
         {
             leftLeaderCount++;
             rightLeaderCount--;
         }
 
-        if (leftLeaderCount > (i + 1) / 2 && rightLeaderCount > (n - i - 1) / 2)
+        if (leftLeaderCount > (index + 1) / 2 && rightLeaderCount > (length - index - 1) / 2)
         {
             equiLeaders++;
         }

@@ -7,27 +7,27 @@
 using namespace std;
 
 // Function to find the non-divisors of every number in an array. Used the count map to store the occurance of every element in a map. sort the array and divide its elements with the divisors from 1 to square root of the processing elements. The corner case here is a pair check which is also fulfilled.
-vector<int> solution(vector<int> &A)
+vector<int> solution(vector<int> &array)
 {
-    int length = A.size();
+    int length = array.size();
 
     unordered_map<int, int> result;
     unordered_map<int, int> countMap;
 
     for (int index = 0; index < length; ++index)
     {
-        countMap[A[index]]++;
+        countMap[array[index]]++;
     }
 
-    vector<int> sortedA = A;
-    sort(sortedA.begin(), sortedA.end());
+    vector<int> sortedArray = array;
+    sort(sortedArray.begin(), sortedArray.end());
 
     int prevNum = -1;
     int nonDivisors = 0;
 
     for (int arrayIndex = 0; arrayIndex < length; ++arrayIndex)
     {
-        int num = sortedA[arrayIndex];
+        int num = sortedArray[arrayIndex];
         if (num == prevNum)
         {
             result[num] = nonDivisors;
@@ -59,15 +59,15 @@ vector<int> solution(vector<int> &A)
 
     for (int index = 0; index < length; index++)
     {
-        A[index] = result[A[index]];
+        array[index] = result[array[index]];
     }
 
-    return A;
+    return array;
 }
 
 int main()
 {
-    vector<int> A = {3, 1, 2, 3, 6}; // 1,2,3,3,6
+    vector<int> A = {3, 1, 2, 3, 6};
     vector<int> result = solution(A);
 
     for (int index = 0; index < result.size(); index++)

@@ -1,35 +1,38 @@
 
 #include <iostream>
 #include <vector>
-#include <unordered_map>
 #include <string>
-#include <algorithm>
 #include <unordered_map>
 using namespace std;
 
-vector<int> solution(string &s, vector<int> &P, vector<int> &Q)
+// function to find the minimal nucleotide from a range of sequence DNA
+vector<int> solution(string &str, vector<int> &P, vector<int> &Q)
 {
     int length = P.size();
     vector<int> result;
     result.reserve(length);
 
+    // store the impacts against nucleotides
     unordered_map<char, int> items = {{'A', 1}, {'C', 2}, {'G', 3}, {'T', 4}};
+
     int start;
     int end;
     char minCharacter;
+
+    // processing the queries. Check the minimum Character from P to Q index in the string.
     for (int queryIndex = 0; queryIndex < length; ++queryIndex)
     {
         start = P[queryIndex];
         end = Q[queryIndex];
 
-        minCharacter = s[start];
+        minCharacter = str[start];
         if (minCharacter != 'A')
         {
             for (int index = start; index <= end; ++index)
             {
-                if (s[index] < minCharacter)
+                if (str[index] < minCharacter)
                 {
-                    minCharacter = s[index];
+                    minCharacter = str[index];
 
                     if (minCharacter == 'A')
                     {
@@ -53,9 +56,9 @@ int main()
 
     vector<int> result = solution(S, P, Q);
     cout << "The result is : " << endl;
-    for (int i = 0; i < result.size(); i++)
+    for (int index = 0; index < result.size(); index++)
     {
-        cout << result[i] << ' ';
+        cout << result[index] << ' ';
     }
     return 0;
 }
