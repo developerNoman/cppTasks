@@ -8,6 +8,8 @@ int solution(vector<int> &array)
 {
 
     int length = array.size();
+
+    // map to store the frequency of element
     unordered_map<int, int> frequency;
 
     // find frequency of each element of array and store it in frequency map
@@ -28,11 +30,6 @@ int solution(vector<int> &array)
             leader = num;
             break;
         }
-    }
-
-    if (leader == -1)
-    {
-        return 0;
     }
 
     int leftLeaderCount = 0;
@@ -59,7 +56,7 @@ int solution(vector<int> &array)
 
 int main()
 {
-    vector<int> A = {4, 3, 4, 4, 4, 2};
-    cout << solution(A) << endl;
+    vector<int> array = {4, 3, 4, 4, 4, 2};
+    cout << solution(array) << endl;
     return 0;
 }

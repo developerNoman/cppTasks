@@ -6,9 +6,9 @@
 using namespace std;
 
 // function to find the minimal nucleotide from a range of sequence DNA
-vector<int> solution(string &str, vector<int> &P, vector<int> &Q)
+vector<int> solution(string &str, vector<int> &pQuery, vector<int> &qQuery)
 {
-    int length = P.size();
+    int length = pQuery.size();
     vector<int> result;
     result.reserve(length);
 
@@ -22,10 +22,10 @@ vector<int> solution(string &str, vector<int> &P, vector<int> &Q)
     // processing the queries. Check the minimum Character from P to Q index in the string.
     for (int queryIndex = 0; queryIndex < length; ++queryIndex)
     {
-        start = P[queryIndex];
-        end = Q[queryIndex];
-
+        start = pQuery[queryIndex];
+        end = qQuery[queryIndex];
         minCharacter = str[start];
+
         if (minCharacter != 'A')
         {
             for (int index = start; index <= end; ++index)
@@ -50,13 +50,15 @@ vector<int> solution(string &str, vector<int> &P, vector<int> &Q)
 
 int main()
 {
-    vector<int> P = {2, 5, 0};
-    vector<int> Q = {4, 5, 6};
-    string S = "CAGCCTA";
+    vector<int> pQuery = {2, 5, 0};
+    vector<int> qQuery = {4, 5, 6};
+    string str = "CAGCCTA";
 
-    vector<int> result = solution(S, P, Q);
+    vector<int> result = solution(str, pQuery, qQuery);
+    int resultSize = result.size();
+
     cout << "The result is : " << endl;
-    for (int index = 0; index < result.size(); index++)
+    for (int index = 0; index < resultSize; index++)
     {
         cout << result[index] << ' ';
     }

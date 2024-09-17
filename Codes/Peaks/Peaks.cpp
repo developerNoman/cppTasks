@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <vector>
 
@@ -12,6 +11,7 @@ int solution(vector<int> &array)
 
     vector<int> peaks;
 
+    // find the peaks from the array and store its peak index in the peaks vector
     for (int index = 1; index < length - 1; ++index)
     {
         if (array[index] > array[index - 1] && array[index] > array[index + 1])
@@ -33,6 +33,7 @@ int solution(vector<int> &array)
     bool valid;
     bool blockHasPeak;
 
+    // starting from the first blocks and divide the overall array evenly into blocks
     for (int blocks = 1; blocks <= length; ++blocks)
     {
         if (length % blocks == 0)
@@ -44,8 +45,11 @@ int solution(vector<int> &array)
             for (int currentBlock = 0; currentBlock < blocks; ++currentBlock)
             {
                 blockHasPeak = false;
+
+                // Ensures that the current peak (at index peakIndex) lies within the current block.
                 while (peakIndex < peakSize && peaks[peakIndex] < (currentBlock + 1) * blockSize)
                 {
+                    // this condition checks if the peak also starts within the block
                     if (peaks[peakIndex] >= currentBlock * blockSize)
                     {
                         blockHasPeak = true;
@@ -71,7 +75,7 @@ int solution(vector<int> &array)
 
 int main()
 {
-    vector<int> A = {1, 2, 3, 4, 3, 4, 1, 2, 3, 4, 6, 2};
-    cout << "The result is: " << solution(A) << endl;
+    vector<int> array = {1, 2, 3, 4, 3, 4, 1, 2, 3, 4, 6, 2};
+    cout << "The result is: " << solution(array) << endl;
     return 0;
 }

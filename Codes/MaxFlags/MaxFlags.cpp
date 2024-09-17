@@ -5,40 +5,45 @@
 using namespace std;
 
 // function to find the maximum flags that are set on peaks
-int solution(vector<int> &A)
+int solution(vector<int> &array)
 {
     vector<int> peaks;
-    int length = A.size();
+    int length = array.size();
 
+    // find the peak from the array and store the peak index in the peaks vector
     for (int index = 1; index < length - 1; index++)
     {
-        if (A[index] > A[index - 1] && A[index] > A[index + 1])
+        if (array[index] > array[index - 1] && array[index] > array[index + 1])
         {
             peaks.push_back(index);
         }
     }
 
-    if (peaks.size() == 0)
+    int peakSize = peaks.size();
+
+    if (peakSize == 0)
     {
         return 0;
     }
 
     int maxFlags = 1;
     int leftSide = 1;
-    int rightSide = peaks.size();
+    int rightSide = peakSize;
 
+    // we have to move from leftside to the rightside of the peaks to place the flags on it. We should only place the flags on peaks it means the maximum flags should be equal to peak size.
     while (leftSide <= rightSide)
     {
         int currentFlags = (leftSide + rightSide) / 2;
         int flags = 1;
         int lastFlag = peaks[0];
 
-        for (int i = 1; i < rightSide; i++)
+        // iterate over the peaks. If the distance between the last peak of flag and current peak is greater than or equal to flags hodling. We can place the flags.
+        for (int peakIndex = 1; peakIndex < peakSize; peakIndex++)
         {
-            if (peaks[i] - lastFlag >= currentFlags)
+            if (peaks[peakIndex] - lastFlag >= currentFlags)
             {
                 flags++;
-                lastFlag = peaks[i];
+                lastFlag = peaks[peakIndex];
                 if (flags == currentFlags)
                 {
                     break;
@@ -47,7 +52,7 @@ int solution(vector<int> &A)
         }
 
         if (flags >= currentFlags)
-        { // 3<4
+        {
             maxFlags = currentFlags;
             leftSide = currentFlags + 1;
         }
@@ -63,7 +68,7 @@ int solution(vector<int> &A)
 int main()
 {
 
-    vector<int> A = {1, 5, 3, 4, 3, 4, 1, 2, 3, 4, 6, 2};
-    cout << "The result is : " << solution(A) << endl;
+    vector<int> array = {1, 5, 3, 4, 3, 4, 1, 2, 3, 4, 6, 2};
+    cout << "The result is : " << solution(array) << endl;
     return 0;
 }

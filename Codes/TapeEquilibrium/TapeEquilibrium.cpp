@@ -4,9 +4,9 @@
 using namespace std;
 
 // function to return the minimum absolute difference between the sum of the first part and the sum of the second part.
-int solution(vector<int> &A)
+int solution(vector<int> &array)
 {
-    int length = A.size();
+    int length = array.size();
 
     if (length <= 1)
     {
@@ -16,16 +16,18 @@ int solution(vector<int> &A)
     int totalSum = 0;
     int sum1 = 0;
 
+    // find the sum of all elements of the array
     for (int index = 0; index < length; index++)
     {
-        totalSum += A[index];
+        totalSum += array[index];
     }
 
-    int minimumResult = abs(A[0] - (totalSum - A[0]));
+    int minimumResult = abs(array[0] - (totalSum - array[0]));
 
+    // find the absolute difference between the sum of the first part and the sum of the second part. Find the sum1 using the next index added in previous sum. Find the sum2 by subtracting sum1 fromm total.
     for (int index = 0; index < length - 1; index++)
     {
-        sum1 += A[index];
+        sum1 += array[index];
         int sum2 = totalSum - sum1;
         int result = abs(sum1 - sum2);
         if (result < minimumResult)
@@ -39,7 +41,7 @@ int solution(vector<int> &A)
 
 int main()
 {
-    vector<int> A = {3, 1, 2, 4, 3};
-    cout << "The result is : " << solution(A) << endl;
+    vector<int> array = {3, 1, 2, 4, 3};
+    cout << "The result is : " << solution(array) << endl;
     return 0;
 }
