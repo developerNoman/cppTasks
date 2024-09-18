@@ -25,6 +25,8 @@ vector<int> solution(vector<int> &array)
 
     int previousNumber = -1;
     int nonDivisors = 0;
+    int countDivisor = 0;
+    int divisor = 1;
 
     for (int arrayIndex = 0; arrayIndex < length; ++arrayIndex)
     {
@@ -35,10 +37,10 @@ vector<int> solution(vector<int> &array)
         }
         else
         {
-            int countDivisor = 0;
+            countDivisor = 0;
 
             // divide the numbers with the divisors from 1 to square root of the processing elements.
-            for (int divisor = 1; divisor <= sqrt(currentNumber); ++divisor)
+            for (divisor = 1; divisor <= sqrt(currentNumber); ++divisor)
             {
                 if (currentNumber % divisor == 0)
                 {
@@ -48,7 +50,15 @@ vector<int> solution(vector<int> &array)
                     // The added case here which check for pair divisor (means if number is divisble by the divisor. Its result will also be the divisor of that number)
                     if (divisor != currentNumber / divisor)
                     {
-                        countDivisor += countMap[currentNumber / divisor];
+                        auto it = countMap.find(currentNumber / divisor);
+                        if (it != countMap.end())
+                        {
+                            countDivisor += it->second;
+                        }
+                        else
+                        {
+                            countDivisor += 0;
+                        }
                     }
                 }
             }

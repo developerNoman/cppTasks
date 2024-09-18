@@ -13,7 +13,7 @@ int solution(vector<int> &array)
     {
         for (size_t nextIndex = index + 1; nextIndex < length; ++nextIndex)
         {
-            if (array[index] + array[nextIndex] >= nextIndex - index)
+            if ((array[index] + array[nextIndex]) >= (nextIndex - index))
             {
                 ++intersections;
                 if (intersections > 10000000)
